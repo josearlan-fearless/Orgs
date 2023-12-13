@@ -3,10 +3,13 @@ package br.com.alura.orgs.ui.activity
 import android.os.Build.VERSION.SDK_INT
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
+import br.com.alura.orgs.R
 import br.com.alura.orgs.dao.ProdutosDao
 import br.com.alura.orgs.databinding.ActivityFormularioProdutoBinding
 import br.com.alura.orgs.databinding.FormularioImagemBinding
+import br.com.alura.orgs.extensions.tentaCarregarImagem
 import br.com.alura.orgs.model.Produto
 import coil.ImageLoader
 import coil.decode.GifDecoder
@@ -40,13 +43,13 @@ class FormularioProdutoActivity : AppCompatActivity() {
             val bindingFormularioImagem = FormularioImagemBinding.inflate(layoutInflater)
             bindingFormularioImagem.formularioImagemBotaoCarregar.setOnClickListener {
                 url = bindingFormularioImagem.formularioImagemUrl.text.toString()
-                bindingFormularioImagem.formularioImagemImageview.load(url, imageLoader)
+                bindingFormularioImagem.formularioImagemImageview.tentaCarregarImagem(url, imageLoader)
             }
 
             AlertDialog.Builder(this)
                 .setPositiveButton("Confirmar") { _, _ ->
                     val url = bindingFormularioImagem.formularioImagemUrl.text.toString()
-                    binding.activityFormularioProdutoImagem.load(url, imageLoader)
+                    binding.activityFormularioProdutoImagem.tentaCarregarImagem(url, imageLoader)
                 }
                 .setNegativeButton("Cancelar") { _, _ -> }
                 .setView(bindingFormularioImagem.root)

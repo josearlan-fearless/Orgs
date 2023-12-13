@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.orgs.R
 import br.com.alura.orgs.databinding.ProdutoItemBinding
+import br.com.alura.orgs.extensions.tentaCarregarImagem
 import br.com.alura.orgs.model.Produto
+import coil.ImageLoader
 import coil.load
 import java.math.BigDecimal
 import java.text.NumberFormat
@@ -37,10 +39,7 @@ class ListaProdutosAdapter(
             }
             binding.imageView.visibility = visibilidade
 
-            binding.imageView.load(produto.imagem) {
-                fallback(R.drawable.error)
-                error(R.drawable.error)
-            }
+            binding.imageView.tentaCarregarImagem(produto.imagem)
         }
 
         private fun formataParaMoedaBrasileira(valor: BigDecimal): String {
