@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import br.com.alura.orgs.databinding.FormularioImagemBinding
 import br.com.alura.orgs.extensions.tentaCarregarImagem
@@ -23,7 +24,7 @@ class FormularioImagemDialog(private val context: Context) {
         }
         .build()
 
-    fun mostra() {
+    fun mostra(quandoImagemCarregada: (imagem: String) -> Unit) {
         val binding = FormularioImagemBinding.inflate(LayoutInflater.from(context))
         binding.formularioImagemBotaoCarregar.setOnClickListener {
             val url = binding.formularioImagemUrl.text.toString()
@@ -34,7 +35,7 @@ class FormularioImagemDialog(private val context: Context) {
             .setPositiveButton("Confirmar") { _, _ ->
                 val url = binding.formularioImagemUrl.text.toString()
                 Log.i("FormularioImagemDialog", "mostra: $url")
-//                binding.activityFormularioProdutoImagem.tentaCarregarImagem(url, imageLoader)
+                quandoImagemCarregada(url)
             }
             .setNegativeButton("Cancelar") { _, _ -> }
             .setView(binding.root)

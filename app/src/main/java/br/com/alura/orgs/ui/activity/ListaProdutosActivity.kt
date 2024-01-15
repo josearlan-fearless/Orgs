@@ -3,12 +3,14 @@ package br.com.alura.orgs.ui.activity
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.orgs.R
 import br.com.alura.orgs.dao.ProdutosDao
 import br.com.alura.orgs.databinding.ActivityListaProdutosBinding
+import br.com.alura.orgs.ui.dialog.FormularioImagemDialog
 import br.com.alura.orgs.ui.recyclerview.adapter.ListaProdutosAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -25,6 +27,9 @@ class ListaProdutosActivity : AppCompatActivity() {
         setContentView(binding.root)
         configuraRecyclerView()
         configuraFab()
+        FormularioImagemDialog(this).mostra { imagem ->
+            Log.i("ListaProdutosActivity", "onCreate: $imagem")
+        }
     }
 
     override fun onResume() {
